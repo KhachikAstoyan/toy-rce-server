@@ -20,7 +20,7 @@ async function main() {
 
 			if (fsSync.existsSync(dockerfilePath)) {
 				console.log(`BUILDING ${folder} IMAGE`);
-				const process = spawn("docker", ["build", "-t", "toyRce:node", languageDir]);
+				const process = spawn("docker", ["build", "-t", `toyrce:${folder}`, languageDir]);
 
 				process.stdout.on("data", function (data) {
 					console.log("stdout: " + data.toString());
@@ -30,7 +30,7 @@ async function main() {
 					console.log("stderr: " + data.toString());
 				});
 
-				process.on("exit", () => {
+				process.on("exit", (code) => {
 					console.log(`child procesz exited with code ${code}`);
 					console.log(`FINISH BUILD ${folder} IMAGE`);
 				});

@@ -9,7 +9,7 @@
 		"test": "jest --config ./jest.config.js --coverage",
 		"build": "tsc",
 		"prepare": "husky install",
-		"build-images": "node scripts/build-images.js"
+		"build-images": "node scripts/build-images.mjs"
 	},
 	"keywords": [],
 	"author": "",
