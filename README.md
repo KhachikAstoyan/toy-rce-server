@@ -6,5 +6,5 @@ what I'm building right now
 TODO
 
 - [x] Make it run in docker containers
-- [ ] Use alpine images for smaller size
+- [x] Use alpine images for smaller size
 - [ ] Possibly stream the output?
