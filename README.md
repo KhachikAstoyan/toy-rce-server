@@ -4,5 +4,7 @@ So I've been thinking about building a toy RCE since august. I experimented with
 what I'm building right now
 
 TODO
-[] Make it run in docker containers
-[] Possibly stream the output?
+
+- [x] Make it run in docker containers
+- [ ] Use alpine images for smaller size
+- [ ] Possibly stream the output?
