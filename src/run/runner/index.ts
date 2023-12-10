@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 import fs from "fs";
 import os from "os";
 import path from "path";
-import { Language, getExtention, supportedLanguages } from "./helpers";
+import { Language, getExtention, getFileName, supportedLanguages } from "./helpers";
 
 const solutionDirectory = os.homedir();
 
@@ -28,7 +28,7 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 			"run",
 			"--rm",
 			"-v",
-			`${filePath}:/solution.${fileExtension}`,
+			`${filePath}:/${getFileName(lang)}.${fileExtension}`,
 			`toyrce:${lang}`,
 		]);
 
@@ -40,7 +40,6 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 		container.stdout.on("data", (data) => (output += data));
 		container.stderr.on("data", (data) => (output += data));
 		container.on("exit", () => {
-			console.log("finished execution");
 			clearTimeout(timeout);
 			fs.unlinkSync(filePath);
 			res(output);

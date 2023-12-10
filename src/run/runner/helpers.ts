@@ -6,6 +6,7 @@ export const supportedLanguages = [
 	"c",
 	"cpp",
 	"python",
+	"java",
 ] as const;
 export type Language = (typeof supportedLanguages)[number];
 
@@ -16,4 +17,9 @@ const langToExtention: { [key in Language]?: string } = {
 	python: "py",
 } as const;
 
+const langToName: { [key in Language]?: string } = {
+	java: "Main",
+};
+
 export const getExtention = (lang: Language) => langToExtention[lang] ?? lang;
+export const getFileName = (lang: Language) => langToName[lang] ?? "solution";
