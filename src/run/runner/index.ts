@@ -29,7 +29,6 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 			"--rm",
 			"--network",
 			"none",
-      "--read-only",
 			"-v",
 			`${filePath}:/${getFileName(lang)}.${fileExtension}:ro`,
 			`toyrce:${lang}`,

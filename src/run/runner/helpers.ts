@@ -7,6 +7,7 @@ export const supportedLanguages = [
 	"cpp",
 	"python",
 	"java",
+  "bash"
 ] as const;
 export type Language = (typeof supportedLanguages)[number];
 
@@ -15,6 +16,7 @@ const langToExtention: { [key in Language]?: string } = {
 	rust: "rs",
 	typescript: "ts",
 	python: "py",
+  bash: "sh",
 } as const;
 
 const langToName: { [key in Language]?: string } = {
