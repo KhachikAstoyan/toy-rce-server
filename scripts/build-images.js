@@ -20,7 +20,7 @@ async function main() {
 
 			if (fsSync.existsSync(dockerfilePath)) {
 				console.log(`BUILDING ${folder} IMAGE`);
-				const process = spawn("docker", ["build", "-t", "codexec:node", languageDir]);
+				const process = spawn("docker", ["build", "-t", "toyRce:node", languageDir]);
 
 				process.stdout.on("data", function (data) {
 					console.log("stdout: " + data.toString());
