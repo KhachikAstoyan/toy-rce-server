@@ -3,7 +3,7 @@ import { randomUUID } from "crypto";
 import fs from "fs";
 import os from "os";
 import path from "path";
-import { Language, langToExtention, supportedLanguages } from "./helpers";
+import { Language, getExtention, supportedLanguages } from "./helpers";
 
 const solutionDirectory = os.homedir();
 
@@ -15,7 +15,7 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 	return new Promise((res, rej) => {
 		let output = "";
 		const id = randomUUID();
-		const fileExtension: string = langToExtention[lang];
+		const fileExtension: string = getExtention(lang);
 		const filePath = path.join(solutionDirectory, `${id}.${fileExtension}`);
 
 		if (!fs.existsSync(solutionDirectory)) {
