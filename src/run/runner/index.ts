@@ -27,8 +27,11 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 		const container = spawn("docker", [
 			"run",
 			"--rm",
+			"--network",
+			"none",
+      "--read-only",
 			"-v",
-			`${filePath}:/${getFileName(lang)}.${fileExtension}`,
+			`${filePath}:/${getFileName(lang)}.${fileExtension}:ro`,
 			`toyrce:${lang}`,
 		]);
 
