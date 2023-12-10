@@ -1,7 +1,7 @@
 FROM node:20
 
-ENV FILE_PATH='/usr/src/sol'
-WORKDIR /usr/solutions
-COPY /usr/solutions .
+WORKDIR $HOME
+RUN mkdir solutions
+WORKDIR $HOME/solutions
 
-CMD ["node", "sol.js"]
+CMD ["node", "solution.js"]
