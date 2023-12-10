@@ -8,3 +8,37 @@ TODO
 - [x] Make it run in docker containers
 - [x] Use alpine images for smaller size
 - [ ] Possibly stream the output?
+
+## How to run?
+
+### 1. Clone the repo
+
+```
+git@github.com:KhachikAstoyan/toy-rce-server.git
+```
+
+### 2. Install dependencies
+
+You can use any package manager for
+
+```
+npm install
+```
+
+### 3. Install docker
+
+You can follow [this](https://docs.docker.com/engine/install/) guide if you don't already have it installed
+
+### 3. Create docker images
+
+Run the following script, which creates the docker images for different languages automatically. (The ouput might not be pretty, still working on this)
+
+```
+npm run build-images
+```
+
+### 4. Run the server and enjoy!
+
+```
+npm run dev
+```
