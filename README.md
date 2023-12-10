@@ -19,7 +19,7 @@ git@github.com:KhachikAstoyan/toy-rce-server.git
 
 ### 2. Install dependencies
 
-You can use any package manager for
+You can use any package manager for this
 
 ```
 npm install
