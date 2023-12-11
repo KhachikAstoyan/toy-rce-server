@@ -8,7 +8,7 @@ TODO
 - [x] Make it run in docker containers
 - [x] Use alpine images for smaller size
 - [ ] Possibly stream the output?
-- [ ] Kill the container if it's running for more than 10 seconds. Right now you're only killing the process that's creating the container, not the container itself
+- [x] Kill the container if it's running for more than 10 seconds. Right now you're only killing the process that's creating the container, not the container itself
 
 ## How to run?
 
