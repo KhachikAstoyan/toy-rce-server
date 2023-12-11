@@ -9,6 +9,8 @@ TODO
 - [x] Use alpine images for smaller size
 - [ ] Possibly stream the output?
 - [x] Kill the container if it's running for more than 10 seconds. Right now you're only killing the process that's creating the container, not the container itself
+- [ ] Optimize the code execution logic. Right now it's very blocking. When sending many requests, it just hangs for a couple of seconds
+- [ ] Possible rewrite the code execution part in rust and leverage multithreading
 
 ## How to run?
 
