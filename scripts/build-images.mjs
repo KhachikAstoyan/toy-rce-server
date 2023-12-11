@@ -16,11 +16,21 @@ async function main() {
 
 		folders.forEach(async (folder) => {
 			const languageDir = path.join(dockerFileDir, folder);
+
+			if (!fsSync.statSync(languageDir).isDirectory()) return;
+
 			const dockerfilePath = path.join(languageDir, "Dockerfile");
 
 			if (fsSync.existsSync(dockerfilePath)) {
 				console.log(`BUILDING ${folder} IMAGE`);
-				const process = spawn("docker", ["build", "-t", `toyrce:${folder}`, languageDir]);
+				const process = spawn("docker", [
+					"build",
+					"-t",
+					`toyrce:${folder}`,
+					"-f",
+					dockerfilePath,
+					".",
+				]);
 
 				process.stdout.on("data", function (data) {
 					console.log("stdout: " + data.toString());

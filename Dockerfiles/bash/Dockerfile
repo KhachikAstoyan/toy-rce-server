@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+COPY Dockerfiles/killer.sh $HOME
 WORKDIR $HOME
 RUN apk add --no-cache bash
-CMD bash solution.sh & sleep 10 ; kill $!
+
+CMD sh killer.sh bash solution.sh

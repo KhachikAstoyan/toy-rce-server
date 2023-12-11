@@ -1,5 +1,5 @@
 FROM node:20-alpine
 
+COPY Dockerfiles/killer.sh $HOME
 WORKDIR $HOME
-
-CMD node solution.js & sleep 10 ; kill $!
+CMD sh killer.sh node solution.js

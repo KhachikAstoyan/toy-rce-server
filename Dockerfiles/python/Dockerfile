@@ -1,5 +1,6 @@
 FROM python:3.8-slim
 
+COPY Dockerfiles/killer.sh $HOME
 WORKDIR $HOME
 
-CMD python3 solution.py & sleep 10 ; kill $!
+CMD sh killer.sh python3 solution.py
