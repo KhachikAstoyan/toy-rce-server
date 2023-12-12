@@ -1,6 +1,7 @@
 import { spawn } from "child_process";
 import { randomUUID } from "crypto";
-import fs from "fs";
+import fs from "node:fs";
+import fsAsync from "node:fs/promises";
 import os from "os";
 import path from "path";
 import { Language, getExtention, getFileName, supportedLanguages } from "./helpers";
@@ -12,17 +13,16 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 		throw new Error("Language not supported");
 	}
 
-	return new Promise((res, rej) => {
+	return new Promise(async (res, rej) => {
 		let output = "";
 		const id = randomUUID();
 		const fileExtension: string = getExtention(lang);
 		const filePath = path.join(solutionDirectory, `${id}.${fileExtension}`);
 
 		if (!fs.existsSync(solutionDirectory)) {
-			fs.mkdirSync(solutionDirectory);
+			await fsAsync.mkdir(solutionDirectory);
 		}
-
-		fs.writeFileSync(filePath, code, { encoding: "utf-8" });
+		await fsAsync.writeFile(filePath, code, { encoding: "utf-8" });
 
 		const container = spawn("docker", [
 			"run",
@@ -41,9 +41,10 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 
 		container.stdout.on("data", (data) => (output += data));
 		container.stderr.on("data", (data) => (output += data));
-		container.on("exit", () => {
+
+		container.on("exit", async () => {
 			clearTimeout(timeout);
-			fs.unlinkSync(filePath);
+			await fsAsync.unlink(filePath);
 			res(output);
 		});
 
