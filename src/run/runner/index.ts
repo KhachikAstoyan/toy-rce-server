@@ -6,9 +6,9 @@ import os from "os";
 import path from "path";
 import { Language, getExtention, getFileName, supportedLanguages } from "./helpers";
 
-const solutionDirectory = os.homedir();
+const solutionDirectory = path.join(os.tmpdir(), "submissions");
 
-export const execute = async (lang: Language, code: string): Promise<string> => {
+export const execute = (lang: Language, code: string): Promise<string> => {
 	if (!supportedLanguages.includes(lang as any)) {
 		throw new Error("Language not supported");
 	}
@@ -17,6 +17,7 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 		let output = "";
 		const id = randomUUID();
 		const fileExtension: string = getExtention(lang);
+		console.log(solutionDirectory);
 		const filePath = path.join(solutionDirectory, `${id}.${fileExtension}`);
 
 		if (!fs.existsSync(solutionDirectory)) {
@@ -24,15 +25,15 @@ export const execute = async (lang: Language, code: string): Promise<string> => 
 		}
 		await fsAsync.writeFile(filePath, code, { encoding: "utf-8" });
 
-		const container = spawn("docker", [
-			"run",
+		const flags = [
 			"--rm",
 			"--network",
 			"none",
 			"-v",
 			`${filePath}:/${getFileName(lang)}.${fileExtension}:ro`,
-			`toyrce:${lang}`,
-		]);
+		];
+
+		const container = spawn("docker", ["run", ...flags, `toyrce:${lang}`]);
 
 		const timeout = setTimeout(() => {
 			container.kill();
