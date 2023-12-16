@@ -9,7 +9,7 @@ fi
 
 pid=$!
 
-(sleep 10 && kill $pid) &
+(sleep 20 && kill $pid) &
 
 wait $pid
 

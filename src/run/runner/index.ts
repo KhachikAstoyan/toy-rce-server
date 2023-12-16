@@ -38,7 +38,7 @@ export const execute = (lang: Language, code: string): Promise<string> => {
 		const timeout = setTimeout(() => {
 			container.kill();
 			res("Request timed out");
-		}, 10000);
+		}, 20000);
 
 		container.stdout.on("data", (data) => (output += data));
 		container.stderr.on("data", (data) => (output += data));
