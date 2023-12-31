@@ -16,7 +16,7 @@ TODO
 ### 1. Clone the repo
 
 ```
-git@github.com:KhachikAstoyan/toy-rce-server.git
+git clone git@github.com:KhachikAstoyan/toy-rce-server.git
 ```
 
 ### 2. Install dependencies
