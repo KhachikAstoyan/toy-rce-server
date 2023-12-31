@@ -1,18 +1,15 @@
 ## What's this?
 
 So I've been thinking about building a toy RCE since august. I experimented with different things here and there, and this is
-what I'm building right now
+what I'm building right now. This repo contains the API, and I moved the code execution engine to another repo and rewrote it in rust. You can check out the code [here](https://github.com/KhachikAstoyan/toy-rce-executor).
 
 TODO
 
-- [x] Make it run in docker containers
-- [x] Use alpine images for smaller size
-- [ ] Possibly stream the output?
-- [x] Kill the container if it's running for more than 10 seconds. Right now you're only killing the process that's creating the container, not the container itself
-- [ ] Optimize the code execution logic. Right now it's very blocking. When sending many requests, it just hangs for a couple of seconds
-- [ ] Optimize go execution times
+- [x] Possible rewrite the code execution part in rust and leverage multithreading
+- [ ] Add db stuff (in progress)
+- [ ] Implement basic auth
 - [ ] Add more robust error handling
-- [ ] Possible rewrite the code execution part in rust and leverage multithreading
+- [ ] Add the ability to add coding problems and check user input against pre-made test cases
 
 ## How to run?
 
@@ -34,13 +31,9 @@ npm install
 
 You can follow [this](https://docs.docker.com/engine/install/) guide if you don't already have it installed
 
-### 3. Create docker images
+### 4. Clone the executor's repo
 
-Run the following script, which creates the docker images for different languages automatically. (The ouput might not be pretty, still working on this)
-
-```
-npm run build-images
-```
+You can skip this step for now because the api doesn't implement anything related to code execution yet. However, the executor's code is [here](https://github.com/KhachikAstoyan/toy-rce-executor). You can find detailed instructions on how to set it up there.
 
 ### 4. Run the server and enjoy!
 
