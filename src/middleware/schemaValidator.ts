@@ -1,4 +1,4 @@
-import { NextFunction, Request } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { AnyZodObject } from 'zod'
 
 export const validateSchema =
@@ -10,6 +10,7 @@ export const validateSchema =
         query: req.query,
         params: req.params,
       })
+      next()
     } catch (error) {
       next(error) // send to error handler TODO:
     }
