@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --respawn ./src/index.ts",
     "create-schema": "ts-node ./src/scripts/createSchema.ts",
     "migrate:create": "ts-node ./src/scripts/createMigration.ts",
+    "migrate:run": "ts-node ./src/scripts/runMigrations.ts",
     "start": "npm run build && node ./dist/index.js",
     "test": "jest --config ./jest.config.js --coverage",
     "build": "tsc",

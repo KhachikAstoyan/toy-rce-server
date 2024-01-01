@@ -2,17 +2,11 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 const migrationFileTemplate = `
-import {db} from '..';
-
-export const up = async () => {
-  await db.connect();
-
+export const up = async (db) => {
   // write the up migration code here
 };
 
-export const down = async () => {
-  await db.connect();
-
+export const down = async (db) => {
   // write the down migratio code here
 };
 `
@@ -26,7 +20,7 @@ if (!migrationName) {
 
 async function createMigration() {
   try {
-    const fileName = `${new Date().toISOString()}-${migrationName}.ts`
+    const fileName = `${new Date().toISOString()}-${migrationName}.mjs`
     const filePath = path.join(migrationDir, fileName)
 
     const migrationDirStats = await fs.stat(migrationDir)
