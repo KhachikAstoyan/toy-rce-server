@@ -11,11 +11,8 @@ async function runMigrations() {
     const files = await fs.readdir(migrationDir)
     files.sort()
 
-    console.log(__filename)
-
     files.forEach(async (file) => {
       const filePath = path.resolve(path.join(migrationDir, file))
-      console.table({ filePath })
       const module = await import(filePath)
 
       if (module.up && module.up instanceof Function) {
