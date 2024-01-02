@@ -65,3 +65,26 @@ export async function login(userData: AuthenticateUserDto): Promise<UserData> {
     refresh_token: await createRefreshToken(tokenPayload),
   }
 }
+
+const addRoleToUser = `
+-- Assuming 'user_id' is the ID of the user and 'role_id' is the ID of the 'admin' role
+INSERT INTO user_roles (user_id, role_id)
+VALUES ((SELECT id FROM users WHERE username = 'JohnDoe'), (SELECT id FROM roles WHERE name = 'admin'));
+`
+
+const getRolePermissons = `
+SELECT p.*
+FROM permissions p
+JOIN role_to_permissions rp ON p.id = rp.permission_id
+JOIN roles r ON rp.role_id = r.id
+WHERE r.name = 'admin';
+`
+const getUserPermissions = `
+SELECT p.*
+FROM permissions p
+JOIN role_to_permissions rp ON p.id = rp.permission_id
+JOIN roles r ON rp.role_id = r.id
+JOIN user_roles ur ON r.id = ur.role_id
+JOIN users u ON ur.user_id = u.id
+WHERE u.username = 'desired_username';
+`

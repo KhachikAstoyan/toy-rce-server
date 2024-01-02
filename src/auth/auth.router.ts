@@ -16,3 +16,4 @@ authRouter.post(
   validateSchema(authenticateUserSchema),
   httpHandler(authController.login)
 )
+authRouter.get('/user/:id', httpHandler(authController.getUserInfo))
