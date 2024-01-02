@@ -1,14 +1,9 @@
 import { Request, Response } from 'express'
-import { AuthService } from './auth.service'
-import { HandleErrors } from '../utils/decorators'
+import * as authService from './auth.service'
+import { RequestHandler } from '../utils/decorators'
 
-export class AuthController {
-  constructor(private service: AuthService) {}
+export async function login(req: Request, res: Response) {}
 
-  async login(req: Request, res: Response) {}
-
-  @HandleErrors
-  async register(req: Request, res: Response) {
-    res.json({ ok: 'ok' })
-  }
+export async function register(req: Request, res: Response) {
+  res.json({ ok: authService.register(req.body) })
 }
