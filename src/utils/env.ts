@@ -10,6 +10,7 @@ const envSchema = z.object({
   DB_PORT: z.string().default('5432'),
   PORT: z.string().default('8080'),
   JWT_SECRET: z.string().min(10),
+  JWT_REFRESH_SECRET: z.string().min(10),
 })
 
 export const env = envSchema.parse(process.env)
