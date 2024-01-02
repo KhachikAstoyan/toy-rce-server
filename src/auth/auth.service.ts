@@ -42,7 +42,7 @@ export async function register(
 export async function login(userData: AuthenticateUserDto): Promise<UserData> {
   const foundUser = await db.query(
     `
-    SELECT username, password_hash, created_at FROM users
+    SELECT * FROM users
     WHERE username = $1 AND email = $2;
   `,
     [userData.username, userData.email]
