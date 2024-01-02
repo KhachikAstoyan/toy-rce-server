@@ -18,6 +18,11 @@ if (!migrationName) {
   process.exit(1)
 }
 
+if (migrationName.includes('.') || migrationName.includes('-')) {
+  console.error('Migration name cannot contain . or -. Please use underscores')
+  process.exit(1)
+}
+
 async function createMigration() {
   try {
     const fileName = `${new Date().toISOString()}-${migrationName}.mjs`
