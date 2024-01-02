@@ -3,6 +3,7 @@ export interface IUserRecord {
   id: string
   created_at: Date
   password_hash: string
+  email: string
 }
 
 export type IUser = Omit<IUserRecord, 'password_hash'>

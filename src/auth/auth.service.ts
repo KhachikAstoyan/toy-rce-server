@@ -23,8 +23,8 @@ export async function register(
 
   const hashedPassword = hashPassword(userData.password)
   const query = await db.query(
-    `INSERT INTO users (username, password_hash) VALUES ($1, $2) RETURNING *`,
-    [userData.username, hashedPassword]
+    `INSERT INTO users (username, password_hash, email) VALUES ($1, $2, $3) RETURNING *`,
+    [userData.username, hashedPassword, userData.email]
   )
 
   const newUser: IUser = query.rows[0]
@@ -43,9 +43,9 @@ export async function login(userData: AuthenticateUserDto): Promise<UserData> {
   const foundUser = await db.query(
     `
     SELECT username, password_hash, created_at FROM users
-    WHERE username = $1
+    WHERE username = $1 AND email = $2;
   `,
-    [userData.username]
+    [userData.username, userData.email]
   )
 
   if (!foundUser.rowCount)
