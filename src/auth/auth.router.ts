@@ -1,14 +1,19 @@
 import Router from 'express'
-import { AuthController } from './auth.controller'
-import { AuthService } from './auth.service'
+import * as authController from './auth.controller'
+import { validateSchema } from '../middleware/schemaValidator'
+import { authenticateUserSchema } from './helpers/schemas'
+import { httpHandler } from '../utils/request'
 
-export const authRouter = () => {
-  const router = Router()
-  const authService = new AuthService()
-  const authController = new AuthController(authService)
+export const authRouter = Router()
 
-  router.post('/register', authController.register)
-  router.post('/login', authController.login)
-
-  return router
-}
+authRouter.post(
+  '/register',
+  validateSchema(authenticateUserSchema),
+  httpHandler(authController.register)
+)
+authRouter.post(
+  '/login',
+  validateSchema(authenticateUserSchema),
+  httpHandler(authController.login)
+)
+authRouter.get('/user/:id', httpHandler(authController.getUserInfo))
